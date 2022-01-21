@@ -11,27 +11,30 @@ let password = [];
 function getCriteria() { 
     let passwordLength = prompt("What is the length of your new password? \n Enter a number between 8-128");
     console.log(passwordLength);
+    if (passwordLength<8 && passwordLength>128) {
+        alert ("Please enter a valid number between 8 and 128");
+    } else {
+        let includeNumber = confirm("Do you require numbers?")
+        console.log(includeNumber);
+    
+        let includeAlpha = confirm("Do you require alphabets?")
+        console.log(includeAlpha);
+    
+        let includeALPHA = confirm("Do you require your letters to be capitalized?")    
+        console.log(includeALPHA);
+    
+        let includeSymbols = confirm("Do you require special character?")
+        console.log(includeSymbols);
 
-    let includeNumber = confirm("Do you require numbers?")
-    console.log(includeNumber);
-    
-    let includeAlpha = confirm("Do you require alphabets?")
-    console.log(includeAlpha);
-    
-    let includeALPHA = confirm("Do you require your letters to be capitalized?")    
-    console.log(includeALPHA);
-    
-    let includeSymbols = confirm("Do you require special character?")
-    console.log(includeSymbols);
-
-    let passwordCriteria = { 
-        passwordLength: passwordLength,
-        includeNumber: includeNumber,
-        includeAlpha: includeAlpha,
-        includeALPHA: includeALPHA,
-        includeSymbols: includeSymbols
+        let passwordCriteria = { 
+            passwordLength: passwordLength,
+            includeNumber: includeNumber,
+            includeAlpha: includeAlpha,
+            includeALPHA: includeALPHA,
+            includeSymbols: includeSymbols
+        } 
+        return passwordCriteria
     }
-    return passwordCriteria
 };
 
 function generatePassword() { 
@@ -42,21 +45,24 @@ function generatePassword() {
     let passwordPool = [];
     if (criteria.includeNumber ===true){ 
         passwordPool += passwordPool.concat(number);    
+        console.log(passwordPool)
     };
     if (criteria.includeAlpha ===true){ 
-        passwordPool += passwordPool.concat(alphabet);       
+        passwordPool = passwordPool.concat(alphabet);     
+        console.log(passwordPool)  
     };
     if (criteria.includeALPHA ===true){
-        passwordPool += passwordPool.concat(ALPHABET);
+        passwordPool = passwordPool.concat(ALPHABET);
+        console.log(passwordPool)
     };
     if (criteria.includeSymbols ===true){
-        passwordPool += passwordPool.concat(character);
+        passwordPool = passwordPool.concat(character);
     };
     console.log(passwordPool);
     
     let tempPassword = [];
     for (let i = 0; i < criteria.passwordLength; i++){
-    char = passwordPool[Math.floor(Math.random() * criteria.passwordLength)];
+    char = passwordPool[Math.floor(Math.random() * passwordPool.length)];
     tempPassword.push(char);
     console.log(char)
     console.log(tempPassword);
